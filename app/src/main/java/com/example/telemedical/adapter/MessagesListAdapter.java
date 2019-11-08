@@ -1,10 +1,12 @@
 package com.example.telemedical.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.sip.SipAudioCall;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,10 +15,13 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.telemedical.ChatBoard;
 import com.example.telemedical.ConstantsUsage.Constants;
+import com.example.telemedical.Formaters.ChatList;
 import com.example.telemedical.Formaters.DoctorFormater;
 import com.example.telemedical.Formaters.MessageFormatter;
 import com.example.telemedical.R;
+import com.example.telemedical.frag.DocFeedBack;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -35,13 +40,14 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MessagesListAdapter extends RecyclerView.Adapter<MessagesListAdapter.Item> {
     Context c;
-    ArrayList<MessageFormatter> list;
-    String doctorId;
+    ArrayList list;
     FirebaseUser user;
+    ArrayList<ChatList> listChat;
 
-    public MessagesListAdapter(Context c, ArrayList<MessageFormatter> list) {
+    public MessagesListAdapter(Context c, ArrayList list, ArrayList<ChatList> listChat) {
         this.c = c;
         this.list = list;
+        this.listChat = listChat;
     }
 
     @NonNull
@@ -55,37 +61,21 @@ public class MessagesListAdapter extends RecyclerView.Adapter<MessagesListAdapte
     @Override
     public void onBindViewHolder(@NonNull Item holder, int position) {
         user = FirebaseAuth.getInstance().getCurrentUser();
-        MessageFormatter formatter = list.get(position);
-
-
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference().child("doctors");
-
-
-        if (user.getUid().equals(formatter.getSender())) {
-            doctorId = formatter.getReciver();
-        } else {
-            doctorId = formatter.getSender();
-        }
-
-
-        myRef.addValueEventListener(new ValueEventListener() {
+        DoctorFormater doc = (DoctorFormater) list.get(position);
+        ChatList chatMsg = listChat.get(position);
+        Glide.with(c).load(doc.getProfileImg()).into(holder.senderImage);
+        holder.name.setText(doc.getName());
+        holder.msg.setText(chatMsg.getMsg());
+        holder.timeStemp.setText(chatMsg.getTimeStemp());
+        holder.gotoMessage.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    DoctorFormater formatter = postSnapshot.getValue(DoctorFormater.class);
-                    holder.name.setText(formatter.getName());
-                    Glide.with(c).load(formatter.getProfileImg()).into(holder.senderImage);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
+            public void onClick(View v) {
+                Intent intent = new Intent(c, ChatBoard.class);
+                intent.putExtra("reciever", doc.getUid());
+                intent.putExtra("img", doc.getProfileImg());
+                c.startActivity(intent);
             }
         });
-
-        holder.msg.setText(formatter.getMessage());
 
 
     }
@@ -96,17 +86,17 @@ public class MessagesListAdapter extends RecyclerView.Adapter<MessagesListAdapte
     }
 
     public class Item extends RecyclerView.ViewHolder {
-        TextView msg, name;
+        TextView msg, name, timeStemp;
         CircleImageView senderImage;
+        LinearLayout gotoMessage;
 
         public Item(@NonNull View v) {
             super(v);
             msg = v.findViewById(R.id.msg);
             name = v.findViewById(R.id.sender_name);
             senderImage = v.findViewById(R.id.doc_img_message_view);
-
+            timeStemp = v.findViewById(R.id.timeStemp);
+            gotoMessage = v.findViewById(R.id.go_to_message);
         }
     }
-
-
 }

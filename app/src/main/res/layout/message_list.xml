@@ -23,10 +23,9 @@
         app:layout_constraintVertical_bias="0.277" />
 
     <LinearLayout
-        android:id="@+id/linearLayout7"
+        android:id="@+id/go_to_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="76dp"
         android:layout_weight="12"
         android:orientation="vertical"
         android:padding="6dp"
@@ -73,6 +72,7 @@
                     android:src="@drawable/ic_calender" />
 
                 <TextView
+                    android:id="@+id/timeStemp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
@@ -81,27 +81,27 @@
                     android:textSize="12dp" />
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:padding="5dp">
+            <!--            <LinearLayout-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:gravity="center"-->
+            <!--                android:orientation="horizontal"-->
+            <!--                android:padding="5dp">-->
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/clock"
-                    android:tint="#646464" />
+            <!--                <ImageView-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:src="@drawable/clock"-->
+            <!--                    android:tint="#646464" />-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text="07:17AM"
-                    android:textColor="#7C838D"
-                    android:textSize="12dp" />
-            </LinearLayout>
+            <!--                <TextView-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_marginLeft="5dp"-->
+            <!--                    android:text="07:17AM"-->
+            <!--                    android:textColor="#7C838D"-->
+            <!--                    android:textSize="12dp" />-->
+            <!--            </LinearLayout>-->
         </LinearLayout>
     </LinearLayout>
 
@@ -116,7 +116,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/linearLayout7"
+        app:layout_constraintStart_toEndOf="@+id/go_to_message"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.809">
 
@@ -140,7 +140,7 @@
         app:layout_constraintBottom_toTopOf="@+id/linearLayout13"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.783"
-        app:layout_constraintStart_toEndOf="@+id/linearLayout7"
+        app:layout_constraintStart_toEndOf="@+id/go_to_message"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.285" />
 
@@ -151,7 +151,7 @@
         android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout7"
+        app:layout_constraintTop_toBottomOf="@+id/go_to_message"
         app:layout_constraintVertical_bias="0.077" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

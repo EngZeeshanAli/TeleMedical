@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.telemedical.ConstantsUsage.Constants;
+import com.example.telemedical.Formaters.ChatList;
 import com.example.telemedical.Formaters.DoctorFormater;
 import com.example.telemedical.Formaters.MessageFormatter;
 import com.example.telemedical.R;
@@ -31,6 +32,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Map;
 
 public class MessagingFrag extends Fragment {
@@ -41,7 +43,8 @@ public class MessagingFrag extends Fragment {
     FirebaseDatabase database;
     DatabaseReference myRef;
     FirebaseUser user;
-    String doctorId, name,img;
+    ArrayList<DoctorFormater> userList;
+    ArrayList<ChatList> chatLists;
 
     @Nullable
     @Override
@@ -65,29 +68,60 @@ public class MessagingFrag extends Fragment {
         user = FirebaseAuth.getInstance().getCurrentUser();
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference().child(Constants.chats);
-        getMessage(user.getUid());
+        userList = new ArrayList<>();
+        chatLists = new ArrayList<>();
+        // getMessage(user.getUid());
+        getMessageList();
     }
 
-
-    void getMessage(String myId) {
-        messageList = new ArrayList<>();
-        ArrayList id = new ArrayList();
-        myRef.addValueEventListener(new ValueEventListener() {
+    private void getMessageList() {
+        DatabaseReference mrf = FirebaseDatabase.getInstance().getReference("ChatList");
+        mrf.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                messageList.clear();
-                for (DataSnapshot contact : dataSnapshot.getChildren()) {
-                    String sendr = (String) contact.child("sender").getValue();
-                    String reciver = (String) contact.child("reciver").getValue();
-                    String message = (String) contact.child("message").getValue();
-                    String timeStemp = (String) contact.child("timeStemp").getValue();
-                    MessageFormatter messageFormatter = new MessageFormatter(sendr, reciver, message, timeStemp);
-                    if (messageFormatter.getSender().equals(myId)
-                            || messageFormatter.getReciver().equals(myId)) {
-                        messageList.add(messageFormatter);
+                chatLists.clear();
+                for (DataSnapshot dk : dataSnapshot.getChildren()) {
+
+                    for (DataSnapshot ds : dk.getChildren()) {
+                        String id = (String) ds.child("id").getValue();
+                        String msg = (String) ds.child("msg").getValue();
+                        String timeStemp = (String) ds.child("timeStemp").getValue();
+                        ChatList chat = new ChatList(id, msg, timeStemp);
+                        chatLists.add(chat);
                     }
-                    mesages.setAdapter(new MessagesListAdapter(getContext(), messageList));
+
                 }
+
+                getChats();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+    }
+
+    private void getChats() {
+        DatabaseReference reff = FirebaseDatabase.getInstance().getReference().child("doctors");
+        reff.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                userList.clear();
+                for (DataSnapshot dv : dataSnapshot.getChildren()) {
+                    DoctorFormater docs = dv.getValue(DoctorFormater.class);
+                    for (ChatList list : chatLists) {
+
+                        if (docs.getUid().equals(list.getId()) && !user.getUid().equals(list.getId())) {
+                            userList.add(docs);
+                        }
+                    }
+                }
+                getMessage();
+                mesages.setAdapter(new MessagesListAdapter(getContext(), userList, chatLists));
             }
 
             @Override
@@ -99,7 +133,35 @@ public class MessagingFrag extends Fragment {
     }
 
 
-    void getDoctors() {
+    void getMessage() {
+        messageList = new ArrayList<>();
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                messageList.clear();
+                for (DataSnapshot chat : dataSnapshot.getChildren()) {
+                    String sendr = (String) chat.child("sender").getValue();
+                    String reciver = (String) chat.child("reciver").getValue();
+                    String message = (String) chat.child("message").getValue();
+                    String timeStemp = (String) chat.child("timeStemp").getValue();
+                    MessageFormatter messageFormatter = new MessageFormatter(sendr, reciver, message, timeStemp);
+
+                    messageList.add(messageFormatter);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+
+    private void getDoctors() {
+        list.clear();
         mDatabase.keepSynced(true);
         mDatabase.child("doctors").addValueEventListener(new ValueEventListener() {
             @Override
@@ -127,7 +189,6 @@ public class MessagingFrag extends Fragment {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     DoctorFormater formatter = postSnapshot.getValue(DoctorFormater.class);
                     if (formatter.getUid().equals(doctorId)) {
-
 
 
                     }

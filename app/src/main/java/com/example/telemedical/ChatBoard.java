@@ -18,7 +18,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import com.bumptech.glide.Glide;
 import com.example.telemedical.ConstantsUsage.Constants;
+import com.example.telemedical.Formaters.ChatList;
 import com.example.telemedical.Formaters.MessageFormatter;
 import com.example.telemedical.adapter.MessageAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,6 +35,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class ChatBoard extends AppCompatActivity implements View.OnClickListener {
     RecyclerView messsagesChat, chatR;
     EditText messageBody;
@@ -42,12 +46,13 @@ public class ChatBoard extends AppCompatActivity implements View.OnClickListener
     DatabaseReference myRef;
     LinearLayout back;
     ArrayList<MessageFormatter> list;
-
+    CircleImageView reciverView;
+    Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_board);
-        Toolbar toolbar = findViewById(R.id.toolbar_message);
+        toolbar = findViewById(R.id.toolbar_message);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -70,6 +75,8 @@ public class ChatBoard extends AppCompatActivity implements View.OnClickListener
         chatR = findViewById(R.id.message_inoming_outgoing);
         chatR.setLayoutManager(new LinearLayoutManager(this));
         getMessage(user.getUid(), reciverId());
+        reciverView = toolbar.findViewById(R.id.reciver_img);
+        Glide.with(this).load(reciverImg()).into(reciverView);
     }
 
     void sendMessage() {
@@ -77,16 +84,36 @@ public class ChatBoard extends AppCompatActivity implements View.OnClickListener
             Date date = new Date();
             SimpleDateFormat formater = new SimpleDateFormat("EEE, MMM dd hh:mm a");
             String dateAndTime = formater.format(date);
+            String msg = messageBody.getText().toString();
             MessageFormatter formatter = new MessageFormatter(user.getUid(), reciverId(), messageBody.getText().toString(),dateAndTime);
             myRef.push().setValue(formatter, new DatabaseReference.CompletionListener() {
                 @Override
                 public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
                     messageBody.getText().clear();
+
                 }
             });
+
+
+            DatabaseReference mmyRef = FirebaseDatabase.getInstance().getReference("ChatList").child(user.getUid()).child(reciverId());
+
+            mmyRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    ChatList chat = new ChatList(reciverId(), msg, dateAndTime);
+                    mmyRef.setValue(chat);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
         } else {
             messageBody.setError("At Least One Charater !");
         }
+
 
     }
 
@@ -126,6 +153,12 @@ public class ChatBoard extends AppCompatActivity implements View.OnClickListener
         Intent i = getIntent();
         String returner = i.getStringExtra("reciever");
         return returner;
+    }
+
+    String reciverImg() {
+        Intent i = getIntent();
+        String imgReturn = i.getStringExtra("img");
+        return imgReturn;
     }
 
     @Override
