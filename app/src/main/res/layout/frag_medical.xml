@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.001"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Question No.1"
+            tools:layout_editor_absoluteX="-16dp"
+            tools:layout_editor_absoluteY="43dp"
+            android:padding="5dp"
+            android:textSize="14dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="How long have you had this problem?"
+            tools:layout_editor_absoluteX="-16dp"
+            tools:layout_editor_absoluteY="43dp"
+            android:padding="5dp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:hint="TYPE HERE"
+            android:padding="10dp"
+            android:background="@drawable/edit_text_background"
+            android:gravity="top|left"
+            android:textSize="14dp"
+            android:elevation="5dp"
+            />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.001"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Question No.2"
+            tools:layout_editor_absoluteX="-16dp"
+            tools:layout_editor_absoluteY="43dp"
+            android:padding="5dp"
+            android:textSize="14dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="What caused the problem?"
+            tools:layout_editor_absoluteX="-16dp"
+            tools:layout_editor_absoluteY="43dp"
+            android:padding="5dp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:hint="TYPE HERE"
+            android:padding="10dp"
+            android:background="@drawable/edit_text_background"
+            android:gravity="top|left"
+            android:textSize="14dp"
+            android:elevation="5dp"
+            />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.001"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Question No.3"
+            tools:layout_editor_absoluteX="-16dp"
+            tools:layout_editor_absoluteY="43dp"
+            android:padding="5dp"
+            android:textSize="14dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="What makes your symptoms worse?"
+            tools:layout_editor_absoluteX="-16dp"
+            tools:layout_editor_absoluteY="43dp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:hint="TYPE HERE"
+            android:padding="10dp"
+            android:background="@drawable/edit_text_background"
+            android:gravity="top|left"
+            android:textSize="14dp"
+            android:elevation="5dp"
+            />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.001"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Question No.4"
+            tools:layout_editor_absoluteX="-16dp"
+            tools:layout_editor_absoluteY="43dp"
+            android:padding="5dp"
+            android:textSize="14dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Do you have any weakness and if so where?"
+            tools:layout_editor_absoluteX="-16dp"
+            tools:layout_editor_absoluteY="43dp"
+            android:padding="5dp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:hint="TYPE HERE"
+            android:padding="10dp"
+            android:background="@drawable/edit_text_background"
+            android:gravity="top|left"
+            android:textSize="14dp"
+            android:elevation="5dp"
+            />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.001"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Question No.5"
+            tools:layout_editor_absoluteX="-16dp"
+            tools:layout_editor_absoluteY="43dp"
+            android:padding="5dp"
+            android:textSize="14dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Do you have any numbness and if so where?"
+            tools:layout_editor_absoluteX="-16dp"
+            tools:layout_editor_absoluteY="43dp"
+            android:padding="5dp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:hint="TYPE HERE"
+            android:padding="10dp"
+            android:background="@drawable/edit_text_background"
+            android:gravity="top|left"
+            android:textSize="14dp"
+            android:elevation="5dp"
+            />
+    </LinearLayout>
+
+
+
+</LinearLayout>
+</ScrollView>

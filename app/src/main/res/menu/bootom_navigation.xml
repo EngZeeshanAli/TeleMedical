@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/homefrg"
+        android:title="" android:icon="@drawable/ic_home"/>
+    <item android:id="@+id/docFrag"
+        android:title="" android:icon="@drawable/ic_stethoscope"/>
+    <item
+        android:id="@+id/appointfrag"
+        android:title="" android:icon="@drawable/ic_calender"/>
+    <item
+        android:id="@+id/messageFrag"
+        android:title="" android:icon="@drawable/ic_chat"/>
+    <item
+        android:id="@+id/profileFrag"
+        android:title="" android:icon="@drawable/ic_usern"/>
+</menu>

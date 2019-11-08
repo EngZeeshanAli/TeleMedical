@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="all">
+        <item
+            android:id="@+id/findFragment"
+            android:checked="true"
+            android:title="Find A Doctor" />
+    </group>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/appointFragment"
+            android:checked="true"
+            android:title="Appointments" />
+
+    </group>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/ehrFragment"
+            android:checked="true"
+            android:title="EHR Files" />
+    </group>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/paymentFragment"
+            android:checked="true"
+            android:title="Payment History" />
+
+    </group>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/profileFragment"
+            android:checked="true"
+            android:title="My Profile" />
+
+    </group>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/medicalFragment"
+            android:checked="true"
+            android:title="Medical History" />
+
+    </group>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/prescriptionFragment"
+            android:checked="true"
+            android:title="Prescription" />
+
+    </group>
+    <group android:checkableBehavior="single">
+        <item
+            android:checked="true"
+            android:title="Help and Support" />
+    </group>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/signOut"
+            android:checked="true"
+            android:title="Sign Out" />
+
+    </group>
+
+
+</menu>

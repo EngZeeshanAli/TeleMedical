@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    app:cardBackgroundColor="#FFFFFF"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/linearLayout5"
+    app:layout_constraintVertical_bias="0.0"
+    tools:layout_editor_absoluteX="-16dp"
+    app:cardElevation="5dp"
+    android:layout_marginTop="5dp"
+    android:id="@+id/appointview">
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="16dp"
+                android:text="NOV\n14"
+                android:textColor="#6C8192"
+                android:textAlignment="center"
+                android:textSize="20dp" />
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+
+                android:background="#4F6C8192"
+                android:padding="14dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:padding="16dp"
+                android:gravity="center|start">
+
+
+                <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/docimg"
+                    app:civ_border_color="#12000000"
+                    app:civ_border_width="2dp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="vertical"
+                    android:padding="3dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Dr. Tahir Masood"
+                        android:textColor="#35C1CF"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Clinic Appointment"
+                        android:textColor="#BF6C8192"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Monday, 10:00 AM "
+                        android:textColor="#BF6C8192"
+                        android:textSize="12dp" />
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/tag"
+                android:padding="4dp"
+                android:text="Confirmed"
+                android:textColor="#FFFFFF" />
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+
+

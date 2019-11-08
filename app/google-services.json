@@ -1,0 +1,85 @@
+{
+  "project_info": {
+    "project_number": "372282668619",
+    "firebase_url": "https://telemedical-40f6d.firebaseio.com",
+    "project_id": "telemedical-40f6d",
+    "storage_bucket": "telemedical-40f6d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:372282668619:android:4584b46d84a2e720f77fce",
+        "android_client_info": {
+          "package_name": "com.cdoxs.telemedicine"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "372282668619-asig6hsbstgnhj25cu4bvfoc42hit2qh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cdoxs.telemedicine",
+            "certificate_hash": "84f22c18b6f31096bd689222472bbf98aab539b3"
+          }
+        },
+        {
+          "client_id": "372282668619-5blmravmpjbrom4qq50b7ogi9vdlvs07.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1TqvCLCMKpKCPD3_Yc-ITYd_RBt-pxNQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "372282668619-5blmravmpjbrom4qq50b7ogi9vdlvs07.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:372282668619:android:37e21ebf2fae1043f77fce",
+        "android_client_info": {
+          "package_name": "com.example.telemedical"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "372282668619-kvvmvjvvebr62v1dlvlsj6n7pj8ai8ks.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.telemedical",
+            "certificate_hash": "84f22c18b6f31096bd689222472bbf98aab539b3"
+          }
+        },
+        {
+          "client_id": "372282668619-5blmravmpjbrom4qq50b7ogi9vdlvs07.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1TqvCLCMKpKCPD3_Yc-ITYd_RBt-pxNQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "372282668619-5blmravmpjbrom4qq50b7ogi9vdlvs07.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

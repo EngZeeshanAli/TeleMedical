@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Online Docctors"
+            android:textSize="14dp"
+            android:padding="10dp"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="#464749"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/onlineMessagesDoctors"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Messages"
+            android:textSize="14dp"
+            android:padding="10dp"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="#464749"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/message_view_point"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"/>
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

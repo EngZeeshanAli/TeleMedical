@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="10dp"
+                    android:text="Consultation Type:"
+                    android:textAlignment="textStart"
+                    android:textColor="#9AA3AE"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:id="@+id/consType"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="10dp"
+                    android:text="Live Doctor and By Appointment"
+                    android:textAlignment="textStart"
+                    android:textColor="#6C8192"
+                    android:textSize="12dp" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="10dp"
+                    android:text="Consultation Fee:"
+                    android:textAlignment="textStart"
+                    android:textColor="#9AA3AE"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:id="@+id/fee"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="10dp"
+                    android:text="1000.00 PKR"
+                    android:textAlignment="textStart"
+                    android:textColor="#6C8192"
+                    android:textSize="12dp" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="10dp"
+                    android:text="Gender:"
+                    android:textAlignment="textStart"
+                    android:textColor="#9AA3AE"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:id="@+id/gender_doc"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="10dp"
+                    android:text="Female"
+                    android:textAlignment="textStart"
+                    android:textColor="#6C8192"
+                    android:textSize="12dp" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="10dp"
+                    android:text="Language Spoken:"
+                    android:textAlignment="textStart"
+                    android:textColor="#9AA3AE"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:id="@+id/spoken"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="10dp"
+                    android:text="English"
+                    android:textAlignment="textStart"
+                    android:textColor="#6C8192"
+                    android:textSize="12dp" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="10dp"
+                    android:text="Primary Address:"
+                    android:textAlignment="textStart"
+                    android:textColor="#9AA3AE"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:id="@+id/addres"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="10dp"
+                    android:text=""
+                    android:textAlignment="textStart"
+                    android:textColor="#6C8192"
+                    android:textSize="12dp" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="10dp"
+                    android:text="Phone:"
+                    android:textAlignment="textStart"
+                    android:textColor="#9AA3AE"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:id="@+id/doc_phone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="10dp"
+                    android:text="+92333 1234567"
+                    android:textAlignment="textStart"
+                    android:textColor="#6C8192"
+                    android:textSize="12dp" />
+            </TableRow>
+        </TableLayout>
+
+    </LinearLayout>
+</ScrollView>
+
