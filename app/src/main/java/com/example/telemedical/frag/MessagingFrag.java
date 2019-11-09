@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -29,11 +30,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Map;
 
 public class MessagingFrag extends Fragment {
     RecyclerView onlineDoctors, mesages;
@@ -45,7 +42,6 @@ public class MessagingFrag extends Fragment {
     FirebaseUser user;
     ArrayList<DoctorFormater> userList;
     ArrayList<ChatList> chatLists;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -171,28 +167,6 @@ public class MessagingFrag extends Fragment {
                     list.add(formatter);
                 }
                 onlineDoctors.setAdapter(new OnlineDoctorsMessageAdapter(list, getContext()));
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
-
-    void dataFire(String doctorId) {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference().child("doctors");
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    DoctorFormater formatter = postSnapshot.getValue(DoctorFormater.class);
-                    if (formatter.getUid().equals(doctorId)) {
-
-
-                    }
-                }
             }
 
             @Override

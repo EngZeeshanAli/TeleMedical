@@ -43,6 +43,7 @@ public class MessagesListAdapter extends RecyclerView.Adapter<MessagesListAdapte
     ArrayList list;
     FirebaseUser user;
     ArrayList<ChatList> listChat;
+    String theLastMessage;
 
     public MessagesListAdapter(Context c, ArrayList list, ArrayList<ChatList> listChat) {
         this.c = c;
@@ -65,7 +66,8 @@ public class MessagesListAdapter extends RecyclerView.Adapter<MessagesListAdapte
         ChatList chatMsg = listChat.get(position);
         Glide.with(c).load(doc.getProfileImg()).into(holder.senderImage);
         holder.name.setText(doc.getName());
-        holder.msg.setText(chatMsg.getMsg());
+        gettingLastMessage(doc.getUid(), holder.msg);
+        //holder.msg.setText(chatMsg.getMsg());
         holder.timeStemp.setText(chatMsg.getTimeStemp());
         holder.gotoMessage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,4 +101,41 @@ public class MessagesListAdapter extends RecyclerView.Adapter<MessagesListAdapte
             gotoMessage = v.findViewById(R.id.go_to_message);
         }
     }
+
+
+    void gettingLastMessage(String userId, TextView lastMsg) {
+        theLastMessage = "default";
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("chatboard");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    MessageFormatter chat = ds.getValue(MessageFormatter.class);
+                    if (chat.getReciver().equals(user.getUid()) && chat.getSender().equals(userId) ||
+                            chat.getReciver().equals(userId) && chat.getSender().equals(user.getUid())) {
+                        theLastMessage = chat.getMessage();
+                    }
+                }
+
+                switch (theLastMessage) {
+                    case "default":
+                        lastMsg.setText("no message");
+                        break;
+                    default:
+                        lastMsg.setText(theLastMessage);
+                        break;
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+
 }
