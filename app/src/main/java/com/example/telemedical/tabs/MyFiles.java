@@ -113,6 +113,7 @@ public class MyFiles extends Fragment implements View.OnClickListener {
         myRef.child(currentUser.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                list.clear();
                 for (DataSnapshot datas : dataSnapshot.getChildren()) {
                     ReportFormatter formatter = datas.getValue(ReportFormatter.class);
                     list.add(formatter);
@@ -254,8 +255,6 @@ public class MyFiles extends Fragment implements View.OnClickListener {
         myRef.child(uid).child(String.valueOf(System.currentTimeMillis())).setValue(formatter, new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.frag_container, new MyFiles()).commit();
                 dialog.dismiss();
             }
         });

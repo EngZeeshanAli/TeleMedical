@@ -5,20 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.example.telemedical.ConstantsUsage.Constants;
 import com.example.telemedical.controls.UiControls;
-import com.google.firebase.messaging.FirebaseMessaging;
 import com.onesignal.OneSignal;
+
 
 public class Main extends AppCompatActivity {
     private static final int REQUEST_TIME = 2000;
@@ -71,5 +66,7 @@ public class Main extends AppCompatActivity {
             }
         }, REQUEST_TIME);
     }
+
+
 }
 

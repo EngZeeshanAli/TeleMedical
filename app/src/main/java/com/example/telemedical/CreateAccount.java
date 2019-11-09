@@ -347,7 +347,6 @@ public class CreateAccount extends AppCompatActivity implements View.OnClickList
     private void updateUI(FirebaseUser user) {
         if (user != null) {
             Intent registration = new Intent(this, SignIn.class);
-            registration.putExtra(Constants.USER, user);
             finish();
             startActivity(registration);
         }

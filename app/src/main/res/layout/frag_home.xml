@@ -97,60 +97,20 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <androidx.cardview.widget.CardView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/appointments_home"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:padding="50dp"
                 app:cardBackgroundColor="#FFFFFF"
-                app:cardElevation="5dp"
-                app:contentPadding="10dp"
+                app:contentPadding="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.586"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardView4"
-                app:layout_constraintVertical_bias="0.056">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="sans-serif-medium"
-                            android:padding="10dp"
-                            android:text="Appointments"
-                            android:textColor="#464749"
-                            android:textSize="20dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="10dp"
-                            android:text="3 Upcoming"
-                            android:textColor="#35C1CF"
-                            android:textSize="16dp" />
-                    </LinearLayout>
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginRight="30dp"
-                        android:src="@drawable/home_aapint" />
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
+                app:layout_constraintVertical_bias="0.056" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/find_doc_home"
@@ -312,18 +272,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginRight="15dp"
+                android:layout_marginBottom="10dp"
                 app:cardBackgroundColor="#FFFFFF"
                 app:cardElevation="5dp"
                 app:contentPadding="20dp"
-                android:layout_marginBottom="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.517"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/medical_home"
-                app:layout_constraintVertical_bias="0.478"
-                android:layout_marginTop="20dp">
+                app:layout_constraintVertical_bias="0.478">
 
                 <LinearLayout
                     android:layout_width="match_parent"

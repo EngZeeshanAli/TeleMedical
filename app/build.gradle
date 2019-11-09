@@ -9,6 +9,8 @@ buildscript {
 apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
 
 repositories {
+    google()
+    jcenter()
     maven { url 'https://maven.google.com' }
 }
 
@@ -40,6 +42,7 @@ android {
     compileOptions {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
+
     }
 }
 
@@ -73,6 +76,5 @@ dependencies {
     implementation 'com.onesignal:OneSignal:[3.11.2, 3.99.99]'
     implementation 'com.itextpdf:itext-pdfa:5.5.10'
     implementation 'com.itextpdf:itextg:5.5.9'
-
 
 }

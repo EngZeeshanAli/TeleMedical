@@ -38,6 +38,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.telemedical.ConstantsUsage.Constants;
 import com.example.telemedical.Formaters.UserFormater;
+import com.example.telemedical.controls.BottomNavigationController;
 import com.example.telemedical.controls.UiControls;
 import com.example.telemedical.frag.AppointmentFrag;
 import com.example.telemedical.frag.EhrFiles;
@@ -150,8 +151,12 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
     }
 
     void getProfilePicture(CircleImageView imageView, String value){
+        if (value == null) {
+            Glide.with(this).load(R.drawable.money).into(imageView);
+        } else {
+            Glide.with(this).load(value).into(imageView);
+        }
 
-        Glide.with(this).load(value).into(imageView);
 
     }
 
@@ -352,16 +357,21 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
         switch (menuItem.getItemId()) {
             case R.id.findFragment:
                 getSupportFragmentManager().beginTransaction().replace(R.id.frag_container, new FindDoctor()).commit();
+                new BottomNavigationController(R.id.docFrag, this);
                 drawer.closeDrawer(GravityCompat.START);
                 break;
             case R.id.appointFragment:
                 getSupportFragmentManager().beginTransaction().replace(R.id.frag_container, new AppointmentFrag()).commit();
                 drawer.closeDrawer(GravityCompat.START);
+                new BottomNavigationController(R.id.appointfrag, this);
+
                 break;
 
             case R.id.profileFragment:
                 getSupportFragmentManager().beginTransaction().replace(R.id.frag_container, new ProfileFrag()).commit();
                 drawer.closeDrawer(GravityCompat.START);
+                new BottomNavigationController(R.id.profileFrag, this);
+
                 break;
 
             case R.id.ehrFragment:

@@ -82,7 +82,7 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
 
         final View decorView = getWindow().getDecorView();
 
-// Register global layout listener.
+        // Register global layout listener.
         decorView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             private final Rect windowVisibleDisplayFrame = new Rect();
             private int lastVisibleDecorViewHeight;
@@ -184,19 +184,6 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
         editor.apply();
     }
 
-
-    void prams(int i, int height) {
-
-        switch (i) {
-            case 0:
-                layout.setTranslationY(height);
-                break;
-            case 1:
-                layout.setTranslationY(-height);
-                break;
-        }
-
-    }
 
 
     @Override

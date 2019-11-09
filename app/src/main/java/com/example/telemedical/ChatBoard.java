@@ -48,6 +48,7 @@ public class ChatBoard extends AppCompatActivity implements View.OnClickListener
     ArrayList<MessageFormatter> list;
     CircleImageView reciverView;
     Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +60,6 @@ public class ChatBoard extends AppCompatActivity implements View.OnClickListener
             getWindow().setNavigationBarColor(ContextCompat.getColor(this, R.color.colorPrimary));
         }
         initGui();
-
     }
 
     void initGui() {
@@ -85,18 +85,14 @@ public class ChatBoard extends AppCompatActivity implements View.OnClickListener
             SimpleDateFormat formater = new SimpleDateFormat("EEE, MMM dd hh:mm a");
             String dateAndTime = formater.format(date);
             String msg = messageBody.getText().toString();
-            MessageFormatter formatter = new MessageFormatter(user.getUid(), reciverId(), messageBody.getText().toString(),dateAndTime);
+            MessageFormatter formatter = new MessageFormatter(user.getUid(), reciverId(), messageBody.getText().toString(), dateAndTime);
             myRef.push().setValue(formatter, new DatabaseReference.CompletionListener() {
                 @Override
                 public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
                     messageBody.getText().clear();
-
                 }
             });
-
-
             DatabaseReference mmyRef = FirebaseDatabase.getInstance().getReference("ChatList").child(user.getUid()).child(reciverId());
-
             mmyRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -109,18 +105,13 @@ public class ChatBoard extends AppCompatActivity implements View.OnClickListener
 
                 }
             });
-
         } else {
             messageBody.setError("At Least One Charater !");
         }
-
-
     }
 
     void getMessage(String myId, String Sender) {
         list = new ArrayList<>();
-
-
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -129,16 +120,15 @@ public class ChatBoard extends AppCompatActivity implements View.OnClickListener
                     String sendr = (String) contact.child("sender").getValue();
                     String reciver = (String) contact.child("reciver").getValue();
                     String message = (String) contact.child("message").getValue();
-                    String timeStemp=(String) contact.child("timeStemp").getValue();
-                    MessageFormatter messageFormatter = new MessageFormatter(sendr, reciver, message,timeStemp);
+                    String timeStemp = (String) contact.child("timeStemp").getValue();
+                    MessageFormatter messageFormatter = new MessageFormatter(sendr, reciver, message, timeStemp);
                     if (messageFormatter.getReciver().equals(myId) && messageFormatter.getSender().equals(Sender)
                             || messageFormatter.getSender().equals(myId) && messageFormatter.getReciver().equals(Sender)) {
                         list.add(messageFormatter);
                     }
+                    chatR.scrollToPosition(list.size() - 1);
                     chatR.setAdapter(new MessageAdapter(getApplicationContext(), list));
-
                 }
-
             }
 
             @Override
@@ -146,7 +136,6 @@ public class ChatBoard extends AppCompatActivity implements View.OnClickListener
 
             }
         });
-
     }
 
     String reciverId() {

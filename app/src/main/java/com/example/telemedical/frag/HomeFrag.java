@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 
 import androidx.annotation.NonNull;
@@ -16,15 +17,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.telemedical.R;
+import com.example.telemedical.adapter.DashBoardAppointments;
 import com.example.telemedical.adapter.HomeDoc;
 import com.example.telemedical.adapter.MainAppointAdapter;
+import com.example.telemedical.controls.BottomNavigationController;
 import com.example.telemedical.controls.UiControls;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomeFrag extends Fragment implements View.OnClickListener {
-    CardView goEhr,appintments,findDoc,prescriptions,history,messages;
-    BottomNavigationView bottomNavigationView;
-
+    CardView goEhr, findDoc, prescriptions, history, messages;
+    RecyclerView appintments;
 
 
     @Nullable
@@ -52,12 +54,8 @@ public class HomeFrag extends Fragment implements View.OnClickListener {
         messages.setOnClickListener(this);
 
         appintments=v.findViewById(R.id.appointments_home);
-        appintments.setOnClickListener(this);
-
-
-        bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottomNavigationView);
-
-
+        appintments.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        appintments.setAdapter(new DashBoardAppointments());
 
     }
 
@@ -69,10 +67,11 @@ public class HomeFrag extends Fragment implements View.OnClickListener {
                 break;
             case R.id.appointments_home:
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frag_container,new AppointmentFrag()).commit();
-
+                new BottomNavigationController(R.id.appointfrag, getActivity());
                 break;
             case R.id.find_doc_home:
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frag_container,new FindDoctor()).commit();
+                new BottomNavigationController(R.id.docFrag, getActivity());
                 break;
             case R.id.home_pres:
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frag_container,new FragPrescripitions()).commit();
@@ -82,7 +81,11 @@ public class HomeFrag extends Fragment implements View.OnClickListener {
                 break;
             case R.id.message_home:
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frag_container,new MessagingFrag()).commit();
+                new BottomNavigationController(R.id.messageFrag, getActivity());
+
                 break;
         }
     }
+
+
 }
