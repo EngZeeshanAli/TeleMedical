@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="360dp"
-    android:layout_height="540dp"
+    android:layout_width="310dp"
+    android:layout_height="590dp"
     android:orientation="vertical">
 
     <LinearLayout
@@ -73,9 +73,10 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.513" />
 
+
                 <TextView
 
-                    android:id="@+id/textView20"
+                    android:id="@+id/reference"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="REFERENCE ID     UYF354657"
@@ -83,9 +84,8 @@
                     android:textSize="14dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView17"
-                    app:layout_constraintVertical_bias="0.0"
+                    app:layout_constraintVertical_bias="0.042"
                     tools:layout_editor_absoluteX="0dp" />
-
 
                 <TextView
                     android:id="@+id/textView21"
@@ -94,8 +94,8 @@
                     android:singleLine="true"
                     android:text="------------------------------------------------------------------------------------"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView20"
-                    app:layout_constraintVertical_bias="0.082"
+                    app:layout_constraintTop_toBottomOf="@+id/reference"
+                    app:layout_constraintVertical_bias="0.028"
                     tools:layout_editor_absoluteX="0dp"></TextView>
 
                 <TableLayout
@@ -141,6 +141,7 @@
                         android:padding="3dp">
 
                         <TextView
+                            android:id="@+id/dialog_date"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -153,6 +154,7 @@
                             tools:layout_editor_absoluteX="0dp" />
 
                         <TextView
+                            android:id="@+id/dialog_time"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -167,22 +169,6 @@
 
                     </TableRow>
 
-                    <TableRow
-                        android:padding="3dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="in 3 days"
-                            android:textSize="14dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/textView17"
-                            app:layout_constraintVertical_bias="0.0"
-                            tools:layout_editor_absoluteX="0dp" />
-
-
-                    </TableRow>
 
                     <TableRow>
 
@@ -190,7 +176,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="to"
+                            android:text="To"
                             android:textSize="14dp"
                             android:padding="3dp"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -204,6 +190,7 @@
                     <TableRow>
 
                         <TextView
+                            android:id="@+id/toName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -220,23 +207,6 @@
                     </TableRow>
 
 
-                    <TableRow>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Gernal Checkup"
-                            android:textSize="14dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/textView17"
-                            app:layout_constraintVertical_bias="0.0"
-                            tools:layout_editor_absoluteX="0dp"
-                            android:padding="3dp"/>
-                        \
-
-
-                    </TableRow>
 
                     <TableRow
                         android:padding="3dp">
@@ -270,6 +240,7 @@
                     <TableRow>
 
                         <TextView
+                            android:id="@+id/feeDialog"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -282,6 +253,7 @@
                             tools:layout_editor_absoluteX="0dp" />
 
                         <TextView
+                            android:id="@+id/typeDialog"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"

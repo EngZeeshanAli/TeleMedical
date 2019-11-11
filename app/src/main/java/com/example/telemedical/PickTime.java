@@ -10,15 +10,21 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.telemedical.adapter.TimeAdapter;
 import com.github.jhonnyx2012.horizontalpicker.HorizontalPicker;
 
 import org.joda.time.DateTime;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+
 public class PickTime extends AppCompatActivity {
 RecyclerView morningTime,afternonTime,evening;
-Button gotoBookAppointment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,47 +33,23 @@ Button gotoBookAppointment;
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-
-        HorizontalPicker picker = (HorizontalPicker) findViewById(R.id.datePicker);
-        picker
-                .setDays(20)
-                .setOffset(10)
-                .setDateSelectedColor(Color.DKGRAY)
-                .setDateSelectedTextColor(Color.WHITE)
-                .setMonthAndYearTextColor(Color.DKGRAY)
-                .setTodayDateBackgroundColor(Color.GRAY)
-                .setUnselectedDayTextColor(Color.DKGRAY)
-                .setDayOfWeekTextColor(Color.DKGRAY)
-                .showTodayButton(false)
-                .init();
-
-        // or on the View directly after init was completed
-        picker.setBackgroundColor(Color.TRANSPARENT);
-        picker.setDate(new DateTime().plusDays(4));
-
         //morning time
         morningTime=findViewById(R.id.morningtime);
         morningTime.setLayoutManager(new GridLayoutManager(this,4));
-        morningTime.setAdapter(new TimeAdapter(3));
+        morningTime.setAdapter(new TimeAdapter(3, this));
 
         afternonTime=findViewById(R.id.afternonTime);
         afternonTime.setLayoutManager(new GridLayoutManager(this,4));
-        afternonTime.setAdapter(new TimeAdapter(7));
+        afternonTime.setAdapter(new TimeAdapter(7, this));
 
         evening=findViewById(R.id.eveingTime);
         evening.setLayoutManager(new GridLayoutManager(this,4));
-        evening.setAdapter(new TimeAdapter(1));
+        evening.setAdapter(new TimeAdapter(1, this));
 
-        gotoBookAppointment=findViewById(R.id.gotoBookAppointment);
-        gotoBookAppointment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(PickTime.this,BookAppointment.class);
-                startActivity(intent);
-            }
-        });
 
     }
+
+
 
     @Override
     public boolean onSupportNavigateUp() {
@@ -75,3 +57,5 @@ Button gotoBookAppointment;
         return true;
     }
 }
+
+

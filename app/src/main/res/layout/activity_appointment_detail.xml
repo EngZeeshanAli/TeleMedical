@@ -48,6 +48,7 @@
 
 
                 <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/deatail_pic_doc"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:src="@drawable/docimg"
@@ -62,6 +63,7 @@
                     android:padding="3dp">
 
                     <TextView
+                        android:id="@+id/name_doc_detail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Dr. Tahir Masood"
@@ -69,6 +71,7 @@
                         android:textSize="14dp" />
 
                     <TextView
+                        android:id="@+id/type_appoint_detail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Clinic Appointment"
@@ -112,6 +115,7 @@
                 android:text="Type" />
 
             <TextView
+                android:id="@+id/type_appoint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -143,6 +147,7 @@
                 android:text="Time" />
 
             <TextView
+                android:id="@+id/time_appoint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -186,6 +191,7 @@
                 android:text="Duration" />
 
             <TextView
+                android:id="@+id/duration_appoint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -228,6 +234,7 @@
                 android:text="Date" />
 
             <TextView
+                android:id="@+id/date_appoint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -291,34 +298,32 @@ being treated." />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tableLayout4"
-        app:layout_constraintVertical_bias="0.8"
-        tools:layout_editor_absoluteX="0dp"
-        android:gravity="center">
+        app:layout_constraintVertical_bias="0.8">
 
         <Button
             android:id="@+id/cancellAppoint"
             android:layout_width="170dp"
             android:layout_height="40dp"
-            android:text="Cancel"
-            android:layout_marginRight="20dp"
             android:background="@drawable/btn_bg_radius"
             android:backgroundTint="#E2223A"
-            android:textColor="#FFFF"
-            />
+            android:layout_marginRight="10dp"
+            android:text="Cancel"
+            android:textColor="#FFFF" />
 
         <Button
             android:id="@+id/rescheduleappoint"
             android:layout_width="170dp"
             android:layout_height="40dp"
-            android:text="Reschedule"
-            android:layout_marginRight="20dp"
             android:background="@drawable/btn_bg_radius"
             android:backgroundTint="#0DB496"
-            android:textColor="#FFFF"
-            />
+            android:text="Reschedule"
+            android:textColor="#FFFF" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

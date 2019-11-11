@@ -41,7 +41,7 @@ public class HomeDoc extends RecyclerView.Adapter<HomeDoc.item> implements View.
 
     @Override
     public void onBindViewHolder(@NonNull item holder, int position) {
-holder.book.setOnClickListener(this);
+        holder.book.setOnClickListener(this);
     }
 
     @Override
@@ -51,37 +51,28 @@ holder.book.setOnClickListener(this);
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.book_Doc_home:
-            openDialog();
+                openDialog();
                 break;
 
         }
     }
 
-
-    public class item extends RecyclerView.ViewHolder {
-        CardView book;
-        public item(@NonNull View itemView) {
-            super(itemView);
-            book=itemView.findViewById(R.id.book_Doc_home);
-        }
-    }
-
-    public void openDialog(){
-    final Dialog dialog=new Dialog(c);
-    dialog.setContentView(R.layout.booking_dialog_view);
-    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-    Button close=dialog.findViewById(R.id.close_dialog_booking);
-        LinearLayout voice=dialog.findViewById(R.id.voice_booking);
-        LinearLayout video=dialog.findViewById(R.id.video_booking);
-        LinearLayout physicall=dialog.findViewById(R.id.physical);
+    public void openDialog() {
+        final Dialog dialog = new Dialog(c);
+        dialog.setContentView(R.layout.booking_dialog_view);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        Button close = dialog.findViewById(R.id.close_dialog_booking);
+        LinearLayout voice = dialog.findViewById(R.id.voice_booking);
+        LinearLayout video = dialog.findViewById(R.id.video_booking);
+        LinearLayout physicall = dialog.findViewById(R.id.physical);
 
 
         voice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(c, Booking.class);
+                Intent intent = new Intent(c, Booking.class);
                 c.startActivity(intent);
             }
         });
@@ -89,7 +80,7 @@ holder.book.setOnClickListener(this);
         video.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(c, Booking.class);
+                Intent intent = new Intent(c, Booking.class);
                 c.startActivity(intent);
             }
         });
@@ -97,28 +88,33 @@ holder.book.setOnClickListener(this);
         physicall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(c, Booking.class);
+                Intent intent = new Intent(c, Booking.class);
                 c.startActivity(intent);
             }
         });
 
 
-    close.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            dialog.dismiss();
-        }
-    });
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
 
 
-
-
-
-    dialog.show();
+        dialog.show();
 
 
     }
 
+    public class item extends RecyclerView.ViewHolder {
+        CardView book;
+
+        public item(@NonNull View itemView) {
+            super(itemView);
+            book = itemView.findViewById(R.id.book_Doc_home);
+        }
+    }
 
 
 }

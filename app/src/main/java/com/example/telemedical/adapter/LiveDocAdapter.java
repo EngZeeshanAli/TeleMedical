@@ -50,6 +50,7 @@ public class LiveDocAdapter extends RecyclerView.Adapter<LiveDocAdapter.Item> {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent (v.getContext(), DoctorDetail.class);
+                intent.putExtra("docId", formatter.getUid());
                 intent.putExtra("name",formatter.getName());
                 intent.putExtra("constype",formatter.getConsulationType());
                 intent.putExtra("expert",formatter.getExpert());

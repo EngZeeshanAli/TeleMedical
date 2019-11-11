@@ -28,22 +28,13 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0"></androidx.appcompat.widget.Toolbar>
 
-            <com.github.jhonnyx2012.horizontalpicker.HorizontalPicker
-                android:id="@+id/datePicker"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/toolbar_booking_time"
-                app:layout_constraintVertical_bias="0.0"
-                tools:layout_editor_absoluteX="0dp" />
-
             <View
                 android:id="@+id/view2"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:background="#7C929090"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/datePicker"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar_booking_time"
                 app:layout_constraintVertical_bias="0.025"
                 tools:layout_editor_absoluteX="-16dp" />
 
@@ -311,20 +302,6 @@
                 tools:layout_editor_absoluteX="0dp" />
 
 
-            <Button
-                android:background="@drawable/btn"
-                android:fontFamily="sans-serif-medium"
-                android:id="@+id/gotoBookAppointment"
-                android:layout_height="wrap_content"
-                android:layout_margin="35dp"
-                android:layout_width="match_parent"
-                android:text="Continue"
-                android:textColor="#FFFFFF"
-                android:textSize="20dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout10"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>

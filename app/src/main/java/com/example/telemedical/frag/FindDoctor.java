@@ -70,6 +70,7 @@ public class FindDoctor extends Fragment {
         mDatabase.child("doctors").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
+                list.clear();
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                     DoctorFormater formatter = postSnapshot.getValue(DoctorFormater.class);
                     list.add(formatter);
@@ -91,6 +92,7 @@ public class FindDoctor extends Fragment {
         mDatabase.child("doctors").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
+                gernallist.clear();
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                     DoctorFormater formatter = postSnapshot.getValue(DoctorFormater.class);
                     gernallist.add(formatter);

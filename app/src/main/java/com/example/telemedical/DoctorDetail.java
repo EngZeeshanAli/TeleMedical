@@ -5,6 +5,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.telemedical.dialog.BookingDialog;
 import com.example.telemedical.main.ConnectActivity;
 import com.example.telemedical.tabs.DocProfileTabPagerAdapter;
 import com.example.telemedical.tabs.TabPagerAdapter;
@@ -21,12 +23,13 @@ import com.google.android.material.tabs.TabLayout;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class DoctorDetail extends AppCompatActivity {
+public class DoctorDetail extends AppCompatActivity implements View.OnClickListener {
     Button fram;
     CircleImageView doc;
     TextView name, expert;
     RatingBar ratings;
-
+    Button booking;
+    String docId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +79,8 @@ public class DoctorDetail extends AppCompatActivity {
         name = findViewById(R.id.name_for_doc);
         expert = findViewById(R.id.experties);
         ratings = findViewById(R.id.ratingIn_detail);
+        booking = findViewById(R.id.boooking_doctor);
+        booking.setOnClickListener(this);
         getSetData();
     }
 
@@ -84,6 +89,7 @@ public class DoctorDetail extends AppCompatActivity {
         String img = intent.getStringExtra("img");
         String name = intent.getStringExtra("name");
         String expert = intent.getStringExtra("expert");
+        docId = intent.getStringExtra("docId");
         Float rank = Float.parseFloat(intent.getStringExtra("rank"));
         Glide.with(this)
                 .load(img)
@@ -91,8 +97,6 @@ public class DoctorDetail extends AppCompatActivity {
         this.name.setText(name);
         this.ratings.setRating(rank);
         this.expert.setText(expert);
-
-
     }
 
 
@@ -102,4 +106,14 @@ public class DoctorDetail extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.boooking_doctor:
+                BookingDialog dialog = new BookingDialog();
+                dialog.show(getSupportFragmentManager(), "Booking Dialog");
+                dialog.setCancelable(false);
+                break;
+        }
+    }
 }

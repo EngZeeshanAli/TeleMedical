@@ -130,7 +130,6 @@ public class ChatBoard extends AppCompatActivity implements View.OnClickListener
                     chatR.setAdapter(new MessageAdapter(getApplicationContext(), list));
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 

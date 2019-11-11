@@ -9,6 +9,7 @@
 
 
     <LinearLayout
+        android:id="@+id/home_frag_view_appointment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
@@ -20,18 +21,20 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/appointNo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-medium"
-                android:padding="10dp"
+                android:padding="6dp"
                 android:text="Appointments"
                 android:textColor="#464749"
-                android:textSize="20dp" />
+                android:textSize="18dp" />
 
             <TextView
+                android:id="@+id/docName_appoint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
+                android:padding="6dp"
                 android:text="3 Upcoming"
                 android:textColor="#35C1CF"
                 android:textSize="16dp" />
