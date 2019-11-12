@@ -48,8 +48,6 @@
             android:name=".SignIn"
             android:configChanges="keyboardHidden" />
         <activity android:name=".Welcome" />
-        <activity android:name=".main.ConnectActivity" />
-        <activity android:name=".main.CallActivity" />
         <activity android:name=".Main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

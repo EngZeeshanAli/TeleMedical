@@ -1,11 +1,13 @@
 package com.example.telemedical;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,13 +15,22 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.telemedical.CallMaker.CallConnection;
+import com.example.telemedical.Formaters.DoctorFormater;
 import com.example.telemedical.dialog.BookingDialog;
-import com.example.telemedical.main.ConnectActivity;
 import com.example.telemedical.tabs.DocProfileTabPagerAdapter;
 import com.example.telemedical.tabs.TabPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
+
+import org.jitsi.meet.sdk.JitsiMeet;
+import org.jitsi.meet.sdk.JitsiMeetActivity;
+import org.jitsi.meet.sdk.JitsiMeetConferenceOptions;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -30,6 +41,7 @@ public class DoctorDetail extends AppCompatActivity implements View.OnClickListe
     RatingBar ratings;
     Button booking;
     String docId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +63,7 @@ public class DoctorDetail extends AppCompatActivity implements View.OnClickListe
         fram.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(DoctorDetail.this, ConnectActivity.class));
+                useCaseMethod();
             }
         });
         pager.setOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
@@ -116,4 +128,40 @@ public class DoctorDetail extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        JitsiMeetActivity activity = new JitsiMeetActivity();
+        activity.onDestroy();
+    }
+
+
+    void useCaseMethod() {
+        String[] colors = {"Video Call", "Audio Call", "Cancell"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Pick an action");
+        builder.setItems(colors, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                CallConnection callConnection = new CallConnection(DoctorDetail.this);
+                switch (which) {
+                    case 0:
+                        callConnection.onVideoCall("Tester");
+                        break;
+                    case 1:
+                        callConnection.onVoiceCall("Tester");
+
+                        break;
+                    case 2:
+                        AlertDialog d = builder.create();
+                        d.dismiss();
+                        break;
+                }
+            }
+        });
+        builder.show();
+    }
+
+
 }

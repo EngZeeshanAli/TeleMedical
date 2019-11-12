@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.example.telemedical.main.CallActivity;
 
 public class UiControls {
     Activity window;

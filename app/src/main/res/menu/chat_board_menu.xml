@@ -2,11 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 <item
+    android:id="@+id/make_Audio"
     android:title="AudioCall"
     android:icon="@drawable/ic_telephone"
     android:iconTint="#FFFFFF"
     app:showAsAction="ifRoom"/>
     <item
+        android:id="@+id/make_Video"
         android:title="VideoCall"
         android:icon="@drawable/ic_videocamera"
         android:iconTint="#FFFFFF"
