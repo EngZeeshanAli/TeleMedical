@@ -43,7 +43,8 @@ public class MessagesListAdapter extends RecyclerView.Adapter<MessagesListAdapte
     ArrayList list;
     FirebaseUser user;
     ArrayList<ChatList> listChat;
-    String theLastMessage;
+    String theLastMessage, timeStemp;
+
 
     public MessagesListAdapter(Context c, ArrayList list, ArrayList<ChatList> listChat) {
         this.c = c;
@@ -63,23 +64,19 @@ public class MessagesListAdapter extends RecyclerView.Adapter<MessagesListAdapte
     public void onBindViewHolder(@NonNull Item holder, int position) {
         user = FirebaseAuth.getInstance().getCurrentUser();
         DoctorFormater doc = (DoctorFormater) list.get(position);
-        ChatList chatMsg = listChat.get(position);
         Glide.with(c).load(doc.getProfileImg()).into(holder.senderImage);
         holder.name.setText(doc.getName());
-        gettingLastMessage(doc.getUid(), holder.msg);
-        //holder.msg.setText(chatMsg.getMsg());
-        holder.timeStemp.setText(chatMsg.getTimeStemp());
+        gettingLastMessage(doc.getUid(), holder.msg, holder.timeStemp);
         holder.gotoMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(c, ChatBoard.class);
                 intent.putExtra("reciever", doc.getUid());
                 intent.putExtra("img", doc.getProfileImg());
+                intent.putExtra("name", doc.getName());
                 c.startActivity(intent);
             }
         });
-
-
     }
 
     @Override
@@ -103,7 +100,7 @@ public class MessagesListAdapter extends RecyclerView.Adapter<MessagesListAdapte
     }
 
 
-    void gettingLastMessage(String userId, TextView lastMsg) {
+    void gettingLastMessage(String userId, TextView lastMsg, TextView time) {
         theLastMessage = "default";
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("chatboard");
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -114,6 +111,7 @@ public class MessagesListAdapter extends RecyclerView.Adapter<MessagesListAdapte
                     if (chat.getReciver().equals(user.getUid()) && chat.getSender().equals(userId) ||
                             chat.getReciver().equals(userId) && chat.getSender().equals(user.getUid())) {
                         theLastMessage = chat.getMessage();
+                        time.setText(chat.getTimeStemp());
                     }
                 }
 

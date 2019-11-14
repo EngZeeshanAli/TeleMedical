@@ -1,2 +1,2 @@
-include ':app', ':webrtc'
+include ':app'
 rootProject.name='TeleMedical'

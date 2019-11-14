@@ -4,9 +4,10 @@ public class UserFormater {
     public UserFormater() {
     }
 
-    String uid,name,email,mobile,gender,password,insurance,fileNo;
+    String uid, name, email, mobile, gender, password, insurance, fileNo, profileImgUser;
 
-    public UserFormater(String uid, String name, String email, String mobile, String gender, String password, String insurance, String fileNo) {
+    public UserFormater(String uid, String name, String email, String mobile, String gender, String password, String insurance, String fileNo, String profileImgUser) {
+        this.uid = uid;
         this.name = name;
         this.email = email;
         this.mobile = mobile;
@@ -14,7 +15,11 @@ public class UserFormater {
         this.password = password;
         this.insurance = insurance;
         this.fileNo = fileNo;
-        this.uid=uid;
+        this.profileImgUser = profileImgUser;
+    }
+
+    public String getUid() {
+        return uid;
     }
 
     public String getName() {
@@ -45,7 +50,7 @@ public class UserFormater {
         return fileNo;
     }
 
-    public String getUid() {
-        return uid;
+    public String getProfileImgUser() {
+        return profileImgUser;
     }
 }

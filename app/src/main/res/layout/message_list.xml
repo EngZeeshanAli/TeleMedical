@@ -50,7 +50,6 @@
             android:layout_width="230dp"
             android:layout_height="wrap_content"
             android:singleLine="true"
-            android:text="I am feeling good now. I have Taken medicine"
             android:textColor="#757779"
             android:textSize="14dp" />
 
@@ -81,27 +80,6 @@
                     android:textSize="12dp" />
             </LinearLayout>
 
-            <!--            <LinearLayout-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:gravity="center"-->
-            <!--                android:orientation="horizontal"-->
-            <!--                android:padding="5dp">-->
-
-            <!--                <ImageView-->
-            <!--                    android:layout_width="wrap_content"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:src="@drawable/clock"-->
-            <!--                    android:tint="#646464" />-->
-
-            <!--                <TextView-->
-            <!--                    android:layout_width="wrap_content"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:layout_marginLeft="5dp"-->
-            <!--                    android:text="07:17AM"-->
-            <!--                    android:textColor="#7C838D"-->
-            <!--                    android:textSize="12dp" />-->
-            <!--            </LinearLayout>-->
         </LinearLayout>
     </LinearLayout>
 

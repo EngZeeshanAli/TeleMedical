@@ -23,6 +23,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/date_appoint_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -49,6 +50,7 @@
 
 
                 <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/docImg_appoint"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:src="@drawable/docimg"
@@ -63,6 +65,7 @@
                     android:padding="3dp">
 
                     <TextView
+                        android:id="@+id/name_doc_apoint"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Dr. Tahir Masood"
@@ -70,6 +73,7 @@
                         android:textSize="14dp" />
 
                     <TextView
+                        android:id="@+id/type_appoint_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Clinic Appointment"
@@ -77,6 +81,7 @@
                         android:textSize="12dp" />
 
                     <TextView
+                        android:id="@+id/time_appoint_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Monday, 10:00 AM "

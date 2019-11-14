@@ -59,11 +59,12 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/name_chater"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:fontFamily="sans-serif-medium"
-                android:text="@string/app_name"
+                android:text="Dr."
                 android:textColor="#FFFFFF"
                 android:textSize="20dp" />
         </LinearLayout>
@@ -90,11 +91,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="2dp"
-        android:background="@drawable/btn_bg_radius"
-        android:padding="10dp">
+        android:background="#E9E7E7"
+        android:padding="12dp">
 
         <EditText
             android:id="@+id/messageBody"

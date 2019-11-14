@@ -4,40 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_marginLeft="5dp"
     >
 
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/img_user_message"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:src="@drawable/docimg"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.026"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.022" />
 
     <TextView
         android:id="@+id/show_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/left_buble"
-        android:padding="10dp"
-        android:maxWidth="200dp"
-        android:layout_marginTop="10dp"
         android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/left_buble"
+        android:maxWidth="200dp"
+        android:padding="10dp"
         android:text="Sample text evalutiaon message."
-        android:textSize="12dp"
         android:textColor="#FFFFFF"
+        android:textSize="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.045"
-        app:layout_constraintStart_toEndOf="@+id/img_user_message"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.038" />
-
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/datetime_message"

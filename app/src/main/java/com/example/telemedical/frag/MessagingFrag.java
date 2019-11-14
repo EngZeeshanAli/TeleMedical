@@ -30,6 +30,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 
 public class MessagingFrag extends Fragment {
@@ -42,6 +43,7 @@ public class MessagingFrag extends Fragment {
     FirebaseUser user;
     ArrayList<DoctorFormater> userList;
     ArrayList<ChatList> chatLists;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -54,9 +56,6 @@ public class MessagingFrag extends Fragment {
         mesages = view.findViewById(R.id.message_view_point);
         onlineDoctors.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         mesages.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-        onlineDoctors.setAdapter(new OnlineDoctorsMessageAdapter(list, getContext()));
-
-
         return view;
     }
 
@@ -80,9 +79,7 @@ public class MessagingFrag extends Fragment {
 
                     for (DataSnapshot ds : dk.getChildren()) {
                         String id = (String) ds.child("id").getValue();
-                        String msg = (String) ds.child("msg").getValue();
-                        String timeStemp = (String) ds.child("timeStemp").getValue();
-                        ChatList chat = new ChatList(id, msg, timeStemp);
+                        ChatList chat = new ChatList(id);
                         chatLists.add(chat);
                     }
 
@@ -102,6 +99,7 @@ public class MessagingFrag extends Fragment {
     }
 
     private void getChats() {
+        ArrayList<String> a = new ArrayList<>();
         DatabaseReference reff = FirebaseDatabase.getInstance().getReference().child("doctors");
         reff.addValueEventListener(new ValueEventListener() {
             @Override
@@ -110,9 +108,13 @@ public class MessagingFrag extends Fragment {
                 for (DataSnapshot dv : dataSnapshot.getChildren()) {
                     DoctorFormater docs = dv.getValue(DoctorFormater.class);
                     for (ChatList list : chatLists) {
+                        if (docs.getUid().equals(list.getId())) {
+                            if (!a.contains(list.getId()) && !list.getId().equals(user.getUid())) {
+                                userList.add(docs);
+                            } else {
+                                a.add(list.getId());
+                            }
 
-                        if (docs.getUid().equals(list.getId()) && !user.getUid().equals(list.getId())) {
-                            userList.add(docs);
                         }
                     }
                 }
@@ -125,7 +127,6 @@ public class MessagingFrag extends Fragment {
 
             }
         });
-
     }
 
 
@@ -141,10 +142,8 @@ public class MessagingFrag extends Fragment {
                     String message = (String) chat.child("message").getValue();
                     String timeStemp = (String) chat.child("timeStemp").getValue();
                     MessageFormatter messageFormatter = new MessageFormatter(sendr, reciver, message, timeStemp);
-
                     messageList.add(messageFormatter);
                 }
-
             }
 
             @Override
@@ -152,16 +151,15 @@ public class MessagingFrag extends Fragment {
 
             }
         });
-
     }
 
 
     private void getDoctors() {
-        list.clear();
         mDatabase.keepSynced(true);
         mDatabase.child("doctors").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
+                list.clear();
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                     DoctorFormater formatter = postSnapshot.getValue(DoctorFormater.class);
                     list.add(formatter);

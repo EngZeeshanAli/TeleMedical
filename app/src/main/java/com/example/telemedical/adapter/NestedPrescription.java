@@ -26,7 +26,7 @@ public class NestedPrescription extends RecyclerView.Adapter<NestedPrescription.
 
     @Override
     public int getItemCount() {
-        return 5;
+        return 2;
     }
 
     public class item extends RecyclerView.ViewHolder{

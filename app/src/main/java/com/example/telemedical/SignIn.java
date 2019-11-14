@@ -128,6 +128,10 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
             password.setError(message);
             return false;
         }
+        if (password.getText().length() < 8) {
+            password.setError("At Least 8 Characters.");
+            return false;
+        }
         smail = mail.getText().toString().trim();
         spassword = password.getText().toString().trim();
         return true;
@@ -162,8 +166,6 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
                             updateUI(null);
                             dialog.dismiss();
                         }
-
-                        // ...
                     }
                 });
     }
@@ -176,14 +178,6 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
             startActivity(home);
         }
     }
-
-    void setRememberMe() {
-        SharedPreferences save = getSharedPreferences(Constants.remember, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = save.edit();
-        editor.putString(Constants.remember, Constants.remember);
-        editor.apply();
-    }
-
 
 
     @Override
@@ -198,7 +192,6 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
             case R.id.signIn:
                 if (getFormData() == true) {
                     signIn(smail, spassword);
-                    setRememberMe();
                 }
 
                 break;
@@ -237,10 +230,6 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
                 });
                 dialog.setCancelable(false);
                 dialog.show();
-
-
-
-
         }
     }
 
@@ -248,14 +237,12 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onStart() {
         super.onStart();
-        SharedPreferences save = getSharedPreferences(Constants.remember, Context.MODE_PRIVATE);
-        String check = save.getString(Constants.remember, "");
-        if (check.equals(Constants.remember)) {
-            FirebaseAuth auth;
-            auth = FirebaseAuth.getInstance();
-            FirebaseUser currentUser = auth.getCurrentUser();
-            this.overridePendingTransition(0, 0);
+        FirebaseAuth chekingAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = chekingAuth.getCurrentUser();
+        if (currentUser != null && currentUser.isEmailVerified()) {
             updateUI(currentUser);
         }
+
+
     }
 }

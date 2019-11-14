@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -38,7 +42,9 @@
             tools:layout_editor_absoluteX="-16dp"
             tools:layout_editor_absoluteY="43dp"
             android:padding="5dp"/>
+
         <EditText
+            android:id="@+id/problemLongLast"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:hint="TYPE HERE"
@@ -46,8 +52,7 @@
             android:background="@drawable/edit_text_background"
             android:gravity="top|left"
             android:textSize="14dp"
-            android:elevation="5dp"
-            />
+            android:elevation="5dp" />
     </LinearLayout>
 
 
@@ -79,7 +84,9 @@
             tools:layout_editor_absoluteX="-16dp"
             tools:layout_editor_absoluteY="43dp"
             android:padding="5dp"/>
+
         <EditText
+            android:id="@+id/cause"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:hint="TYPE HERE"
@@ -87,8 +94,7 @@
             android:background="@drawable/edit_text_background"
             android:gravity="top|left"
             android:textSize="14dp"
-            android:elevation="5dp"
-            />
+            android:elevation="5dp" />
     </LinearLayout>
 
 
@@ -122,6 +128,7 @@
             tools:layout_editor_absoluteY="43dp" />
 
         <EditText
+            android:id="@+id/symtoms"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:hint="TYPE HERE"
@@ -129,8 +136,7 @@
             android:background="@drawable/edit_text_background"
             android:gravity="top|left"
             android:textSize="14dp"
-            android:elevation="5dp"
-            />
+            android:elevation="5dp" />
     </LinearLayout>
 
 
@@ -162,7 +168,9 @@
             tools:layout_editor_absoluteX="-16dp"
             tools:layout_editor_absoluteY="43dp"
             android:padding="5dp"/>
+
         <EditText
+            android:id="@+id/weakness"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:hint="TYPE HERE"
@@ -170,8 +178,7 @@
             android:background="@drawable/edit_text_background"
             android:gravity="top|left"
             android:textSize="14dp"
-            android:elevation="5dp"
-            />
+            android:elevation="5dp" />
     </LinearLayout>
 
 
@@ -203,7 +210,9 @@
             tools:layout_editor_absoluteX="-16dp"
             tools:layout_editor_absoluteY="43dp"
             android:padding="5dp"/>
+
         <EditText
+            android:id="@+id/numbness"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:hint="TYPE HERE"
@@ -211,11 +220,20 @@
             android:background="@drawable/edit_text_background"
             android:gravity="top|left"
             android:textSize="14dp"
-            android:elevation="5dp"
-            />
+            android:elevation="5dp" />
     </LinearLayout>
 
+    <Button
+        android:id="@+id/save_medicalQuestion"
+        android:layout_width="200dp"
+        android:layout_height="55dp"
+        android:layout_gravity="center"
+        android:background="@drawable/btn_bg_radius"
+        android:text="save"
+        android:textColor="#FFFFFF" />
 
 
 </LinearLayout>
-</ScrollView>
+
+    </ScrollView>
+</RelativeLayout>

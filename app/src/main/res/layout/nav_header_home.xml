@@ -14,7 +14,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:contentDescription="@string/nav_header_desc"
-        android:src="@drawable/user"
+        android:src="@drawable/ic_usern"
         app:civ_border_color="#12000000"
         app:civ_border_width="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -24,12 +24,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/current_user_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:fontFamily="sans-serif-medium"
         android:textSize="16dp"
-        android:text="Taha Zafar"
+        android:text="......"
         android:textColor="#FFFFFF"
         android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"

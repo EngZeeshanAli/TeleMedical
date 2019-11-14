@@ -46,8 +46,6 @@ public class EhrFiles extends Fragment {
 
             }
         });
-
         return view;
-
     }
 }

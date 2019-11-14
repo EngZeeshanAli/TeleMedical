@@ -67,15 +67,14 @@ import java.util.regex.Pattern;
 public class CreateAccount extends AppCompatActivity implements View.OnClickListener {
     TextView login;
     Button register;
-    private EditText email, mobile, password, insurance, fileNo;
-    private String sname, semail, smobile, sgender, spassword, sinsurance, sfileNo;
+    private EditText email, mobile, password, insurance, fileNo, name;
+    private String sname, semail, smobile, sgender, spassword, sinsurance, sfileNo, profileImg = "";
     private FirebaseAuth mAuth;
     private ProgressDialog dialog;
     private Spinner gender;
     ScrollView view;
     final int MIN_KEYBOARD_HEIGHT_PX = 150;
     int hight;
-    String codeSend;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +83,6 @@ public class CreateAccount extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
         // Write a message to the database
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -142,15 +140,14 @@ public class CreateAccount extends AppCompatActivity implements View.OnClickList
         } else {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.GET_ACCOUNTS}, 100);
         }
-
     }
-
 
     void initGui() {
         login = findViewById(R.id.goSignIn);
         register = findViewById(R.id.register_user);
         register.setOnClickListener(this);
         login.setOnClickListener(this);
+        name = findViewById(R.id.registername);
         email = findViewById(R.id.registermail);
         mobile = findViewById(R.id.registermob);
         gender = findViewById(R.id.gender);
@@ -163,17 +160,14 @@ public class CreateAccount extends AppCompatActivity implements View.OnClickList
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 sgender = parent.getItemAtPosition(position).toString();
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
         view = findViewById(R.id.createAccountsv);
-
         final View decorView = getWindow().getDecorView();
-
-// Register global layout listener.
+        // Register global layout listener.
         decorView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             private final Rect windowVisibleDisplayFrame = new Rect();
             private int lastVisibleDecorViewHeight;
@@ -183,7 +177,6 @@ public class CreateAccount extends AppCompatActivity implements View.OnClickList
                 // Retrieve visible rectangle inside window.
                 decorView.getWindowVisibleDisplayFrame(windowVisibleDisplayFrame);
                 final int visibleDecorViewHeight = windowVisibleDisplayFrame.height();
-
                 // Decide whether keyboard is visible from changing decor view height.
                 if (lastVisibleDecorViewHeight != 0) {
                     if (lastVisibleDecorViewHeight > visibleDecorViewHeight + MIN_KEYBOARD_HEIGHT_PX) {
@@ -204,68 +197,19 @@ public class CreateAccount extends AppCompatActivity implements View.OnClickList
                 lastVisibleDecorViewHeight = visibleDecorViewHeight;
             }
         });
-
-    }
-
-    void otpVarification() {
-        Dialog dialog = new Dialog(this);
-        dialog.setContentView(R.layout.otp_layout);
-        EditText otp = dialog.findViewById(R.id.otp);
-        ImageView close = dialog.findViewById(R.id.close_create);
-        close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-        Button button = dialog.findViewById(R.id.otpVerrify);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (TextUtils.isEmpty(otp.getText())) {
-                    otp.setError("OTP required!");
-                    return;
-                }
-                PhoneAuthCredential credential = PhoneAuthProvider.getCredential(codeSend, otp.getText().toString());
-                signInWithPhoneAuthCredential(credential);
-            }
-        });
-
-
-        dialog.show();
-
-
-    }
-
-    private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            setRegister(getFormData(), semail, spassword);
-                            AuthCredential credential = EmailAuthProvider.getCredential(semail, spassword);
-                            // ...
-                        } else {
-                            // Sign in failed, display a message and update the UIT
-                            Toast.makeText(CreateAccount.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                            if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
-                                // The verification code entered was invalid
-                            }
-                        }
-                    }
-                });
     }
 
     private boolean getFormData() {
         String message = "necessary".toUpperCase();
 
+        if (TextUtils.isEmpty(name.getText().toString())) {
+            name.setError(message);
+        }
+
         if (TextUtils.isEmpty(email.getText().toString())) {
             email.setError(message);
             return false;
         }
-
 
         if (TextUtils.isEmpty(mobile.getText().toString())) {
             mobile.setError(message);
@@ -278,7 +222,11 @@ public class CreateAccount extends AppCompatActivity implements View.OnClickList
             return false;
         }
 
-
+        if (password.getText().length() < 8) {
+            password.setError("must be 8 characters");
+            return false;
+        }
+        sname = name.getText().toString();
         semail = email.getText().toString().trim();
         smobile = mobile.getText().toString();
         spassword = password.getText().toString().trim();
@@ -288,75 +236,59 @@ public class CreateAccount extends AppCompatActivity implements View.OnClickList
 
     }
 
-    void setRegister(Boolean register, final String email, String password) {
-        if (register == true) {
-            dialog = new ProgressDialog(this);
-            dialog.setMessage("Registering ! Please Wait.");
-            dialog.show();
-
-            mAuth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                // Sign in success, update UI with the signed-in user's information
-                                FirebaseUser user = mAuth.getCurrentUser();
-
-                                user.sendEmailVerification()
-                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                if (task.isSuccessful()) {
-                                                    String uid = user.getUid();
-                                                    savingData(uid, user);
-                                                }
+    void setRegister(final String email, String password) {
+        dialog = new ProgressDialog(this);
+        dialog.setMessage("Registering ! Please Wait.");
+        dialog.show();
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            String uid = user.getUid();
+                            user.sendEmailVerification()
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                savingData(uid);
+                                            } else {
+                                                user.delete();
                                             }
-                                        });
-
-
-                            } else {
-                                // If sign in fails, display a message to the user.
-                                Exception exception = task.getException();
-
-                                Toast.makeText(CreateAccount.this, exception.getMessage(),
-                                        Toast.LENGTH_SHORT).show();
-                                updateUI(null);
-                                dialog.dismiss();
-
-                            }
-
-                            // ...
+                                        }
+                                    });
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Exception exception = task.getException();
+                            Toast.makeText(CreateAccount.this, exception.getMessage(),
+                                    Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
                         }
-                    });
-        }
+                    }
+                });
     }
 
-    private void savingData(String uid, final FirebaseUser firebaseUser) {
+    private void savingData(String uid) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference().child(Constants.SAVE_USER);
-        final UserFormater user = new UserFormater(uid, sname, semail, smobile, sgender, spassword, sinsurance, sfileNo);
+        final UserFormater user = new UserFormater(uid, sname, semail, smobile, sgender, spassword, sinsurance, sfileNo, profileImg);
         myRef.child(uid).setValue(user, new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
                 dialog.dismiss();
-                updateUI(firebaseUser);
+                updateUI();
             }
         });
     }
 
-    private void updateUI(FirebaseUser user) {
-        if (user != null) {
-            Intent registration = new Intent(this, SignIn.class);
-            finish();
-            startActivity(registration);
-        }
+    private void updateUI() {
+        Intent signIn = new Intent(this, SignIn.class);
+        finish();
+        startActivity(signIn);
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        // Write a message to the database
-    }
 
     @Override
     public void onClick(View v) {
@@ -367,47 +299,17 @@ public class CreateAccount extends AppCompatActivity implements View.OnClickList
                 startActivity(signIn);
                 break;
             case R.id.register_user:
-//                PhoneAuthProvider.getInstance().verifyPhoneNumber(
-//                        "+923048100010",        // Phone number to verify
-//                        60,                 // Timeout duration
-//                        TimeUnit.SECONDS,   // Unit of timeout
-//                        this,               // Activity (for callback binding)
-//                        mCallbacks);
-//                otpVarification();
-                getFormData();
                 if (getFormData() == true) {
-                    setRegister(getFormData(), semail, spassword);
-
+                    setRegister(semail, spassword);
                 }
                 break;
         }
     }
 
-    PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-        @Override
-        public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
-            Toast.makeText(CreateAccount.this, phoneAuthCredential.getSmsCode(), Toast.LENGTH_SHORT).show();
-        }
-
-        @Override
-        public void onVerificationFailed(@NonNull FirebaseException e) {
-            Toast.makeText(CreateAccount.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-
-        @Override
-        public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
-            super.onCodeSent(s, forceResendingToken);
-            codeSend = s;
-            Toast.makeText(CreateAccount.this, s, Toast.LENGTH_SHORT).show();
-        }
-    };
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent signIn = new Intent(this, SignIn.class);
-        finish();
-        startActivity(signIn);
+        updateUI();
     }
 
     @Override
@@ -416,7 +318,6 @@ public class CreateAccount extends AppCompatActivity implements View.OnClickList
         if (requestCode == 100) {
             getEmail();
         }
-
     }
 
 }

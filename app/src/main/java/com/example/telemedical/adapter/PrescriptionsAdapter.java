@@ -38,7 +38,7 @@ public class PrescriptionsAdapter extends RecyclerView.Adapter<PrescriptionsAdap
 
     @Override
     public int getItemCount() {
-        return 4;
+        return 1;
     }
 
     public class item extends RecyclerView.ViewHolder{

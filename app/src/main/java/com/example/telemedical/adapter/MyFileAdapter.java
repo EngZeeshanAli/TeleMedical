@@ -8,10 +8,12 @@ import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Environment;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -30,17 +32,18 @@ import com.google.firebase.storage.StorageReference;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
-public class MyFileAdapter extends RecyclerView.Adapter<MyFileAdapter.item>  {
+public class MyFileAdapter extends RecyclerView.Adapter<MyFileAdapter.item> {
     private StorageReference mStorageRef;
     ArrayList<ReportFormatter> list;
     Context c;
-    String uid,openlocation;
+    String uid, openlocation;
 
-    public MyFileAdapter(ArrayList<ReportFormatter> list, Context c,String uid) {
+    public MyFileAdapter(ArrayList<ReportFormatter> list, Context c, String uid) {
         this.list = list;
         this.c = c;
-        this.uid=uid;
+        this.uid = uid;
     }
 
     @NonNull
@@ -55,24 +58,31 @@ public class MyFileAdapter extends RecyclerView.Adapter<MyFileAdapter.item>  {
     @Override
     public void onBindViewHolder(@NonNull item holder, int position) {
         ReportFormatter formatter = list.get(position);
+        String[] separated = formatter.getName().split(",");
+        long date = Long.parseLong(separated[1]);
+        // or you already have long value of date, use this instead of milliseconds variable.
+        String d = DateFormat.format("MM/dd/yyyy", new Date(date)).toString();
+        holder.fileName.setText(separated[0]);
+        holder.nameDate.setText(formatter.getSharedWith() + " (" + d.toString() + ")");
         final String download = formatter.getDownloadUrl();
-
-
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(c, "Downaloading Started!", Toast.LENGTH_SHORT).show();
                 StorageReference mStorageRef;
-                mStorageRef = FirebaseStorage.getInstance().getReference(Constants.UPLOAD_FILE+uid+"/").child(download);
+                mStorageRef = FirebaseStorage.getInstance().getReference(Constants.UPLOAD_FILE + uid + "/").child(download);
                 try {
-                    File dir=new File(Environment.getExternalStorageDirectory(),"TeleMedical"+File.separator +"reports");
-                    if (!dir.exists()){
+                    File first = new File(Environment.getExternalStorageDirectory(), "TeleMedical");
+                    if (!first.exists()) {
+                        first.mkdir();
+                    }
+                    File dir = new File(first, "Repots");
+                    if (!dir.exists()) {
                         dir.mkdir();
                     }
-                    File directory = new File(dir,formatter.getName()+".pdf");
-
+                    File directory = new File(dir, formatter.getName() + ".pdf");
                     File localFile = File.createTempFile(download, "pdf");
-                    openlocation = formatter.getName()+".pdf";
+                    openlocation = formatter.getName() + ".pdf";
 
 
                     mStorageRef.getFile(directory)
@@ -106,10 +116,13 @@ public class MyFileAdapter extends RecyclerView.Adapter<MyFileAdapter.item>  {
 
     public class item extends RecyclerView.ViewHolder {
         LinearLayout layout;
+        TextView fileName, nameDate;
 
         public item(@NonNull View itemView) {
             super(itemView);
             layout = itemView.findViewById(R.id.pdf_file);
+            fileName = itemView.findViewById(R.id.fileName);
+            nameDate = itemView.findViewById(R.id.nameDate);
         }
     }
 
@@ -119,11 +132,6 @@ public class MyFileAdapter extends RecyclerView.Adapter<MyFileAdapter.item>  {
                         .setSmallIcon(R.drawable.logo)
                         .setContentTitle("Download Complete!")
                         .setContentText("Store to Telemedical folder in mobile storage.");
-//        Intent intent = new Intent();
-//        intent.setAction(android.content.Intent.ACTION_VIEW);
-//        intent.setType("application/pdf");
-//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
         // Add as notification
         NotificationManager manager = (NotificationManager) c.getSystemService(Context.NOTIFICATION_SERVICE);
         manager.notify(0, builder.build());

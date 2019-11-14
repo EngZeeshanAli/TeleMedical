@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.telemedical.CallMaker.CallConnection;
@@ -37,6 +38,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.jitsi.meet.sdk.JitsiMeet;
 import org.jitsi.meet.sdk.JitsiMeetActivity;
+import org.jitsi.meet.sdk.JitsiMeetActivityDelegate;
 import org.jitsi.meet.sdk.JitsiMeetConferenceOptions;
 
 import java.net.MalformedURLException;
@@ -58,6 +60,8 @@ public class ChatBoard extends AppCompatActivity implements View.OnClickListener
     ArrayList<MessageFormatter> list;
     CircleImageView reciverView;
     Toolbar toolbar;
+    TextView chater;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +90,11 @@ public class ChatBoard extends AppCompatActivity implements View.OnClickListener
         chatR.setLayoutManager(new LinearLayoutManager(this));
         getMessage(user.getUid(), reciverId());
         reciverView = toolbar.findViewById(R.id.reciver_img);
-        Glide.with(this).load(reciverImg()).into(reciverView);
+        chater = toolbar.findViewById(R.id.name_chater);
+        chater.setText(reciverName());
+        if (!reciverImg().equals("")) {
+            Glide.with(this).load(reciverImg()).into(reciverView);
+        }
 
     }
 
@@ -107,7 +115,7 @@ public class ChatBoard extends AppCompatActivity implements View.OnClickListener
             mmyRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    ChatList chat = new ChatList(reciverId(), msg, dateAndTime);
+                    ChatList chat = new ChatList(reciverId());
                     mmyRef.setValue(chat);
                 }
 
@@ -154,12 +162,18 @@ public class ChatBoard extends AppCompatActivity implements View.OnClickListener
         return returner;
     }
 
-    String reciverImg() {
+    public String reciverImg() {
         Intent i = getIntent();
         String imgReturn = i.getStringExtra("img");
         return imgReturn;
     }
 
+
+    public String reciverName() {
+        Intent i = getIntent();
+        String name = i.getStringExtra("name");
+        return name;
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -196,8 +210,6 @@ public class ChatBoard extends AppCompatActivity implements View.OnClickListener
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        JitsiMeetActivity activity = new JitsiMeetActivity();
-        activity.onDestroy();
     }
 
 

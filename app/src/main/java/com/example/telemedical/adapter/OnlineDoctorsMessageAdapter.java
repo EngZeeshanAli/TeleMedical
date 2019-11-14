@@ -47,6 +47,7 @@ public class OnlineDoctorsMessageAdapter extends RecyclerView.Adapter<OnlineDoct
             Intent intent=new Intent(c, ChatBoard.class);
             intent.putExtra("reciever",formater.getUid());
             intent.putExtra("img", formater.getProfileImg());
+            intent.putExtra("name", formater.getName());
             c.startActivity(intent);
         }
     });

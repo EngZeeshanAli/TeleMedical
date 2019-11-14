@@ -93,6 +93,51 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:src="@drawable/ic_user" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:fontFamily="sans-serif-medium"
+                            android:text="Name"
+                            android:textColor="#646464"
+                            android:textSize="12dp" />
+
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/registername"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:background="@null"
+                        android:hint="enter full name."
+                        android:imeOptions="actionNext"
+                        android:inputType="textEmailAddress"
+                        android:padding="7dp"
+                        android:textSize="12dp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginRight="18dp"
+                    android:background="@drawable/block"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:src="@drawable/ic_mail" />
 
                         <TextView
@@ -367,8 +412,8 @@
                         android:id="@+id/goSignIn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="LOGIN"
                         android:layout_marginLeft="8dp"
+                        android:text="LOGIN"
                         android:textAlignment="center"
                         android:textColor="#0C9DE3"
                         android:textSize="12dp" />

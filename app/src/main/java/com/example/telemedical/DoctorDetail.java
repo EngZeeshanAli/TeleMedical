@@ -132,8 +132,6 @@ public class DoctorDetail extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        JitsiMeetActivity activity = new JitsiMeetActivity();
-        activity.onDestroy();
     }
 
 

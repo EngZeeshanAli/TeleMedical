@@ -6,6 +6,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -86,6 +87,7 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
     ProgressDialog dialog;
     View headerView;
     String uid;
+    TextView name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,7 +115,6 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 1);
             }
         }
-
     }
 
 
@@ -122,6 +123,7 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
         FirebaseUser currentUser = mAuth.getCurrentUser();
         uid = currentUser.getUid();
         headerView = navigationView.getHeaderView(0);
+        name = headerView.findViewById(R.id.current_user_name);
         imageView = headerView.findViewById(R.id.nav_profile_image);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,15 +131,20 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
                 showPictureDialog();
             }
         });
+
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference().child(Constants.USER_PROFILE_PIC).child(uid);
+        myRef = database.getReference().child("patients").child(uid);
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);
-                getProfilePicture(imageView,value);
+                UserFormater formater = dataSnapshot.getValue(UserFormater.class);
+                String value = formater.getProfileImgUser();
+                if (value != null && !value.equals("")) {
+                    Glide.with(getApplicationContext()).load(value).into(imageView);
+                }
+                name.setText(formater.getName());
             }
 
             @Override
@@ -145,25 +152,13 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
                 // Failed to read value
             }
         });
-        setProfile(uid);
-
-
     }
 
-    void getProfilePicture(CircleImageView imageView, String value){
-        if (value == null) {
-            Glide.with(this).load(R.drawable.money).into(imageView);
-        } else {
-            Glide.with(this).load(value).into(imageView);
-        }
-
-
-    }
 
     private void savingData(String uid,String downloader) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference().child(Constants.USER_PROFILE_PIC);
-        myRef.child(uid).setValue(downloader, new DatabaseReference.CompletionListener() {
+        DatabaseReference myRef = database.getReference().child("patients").child(uid);
+        myRef.child("profileImgUser").setValue(downloader, new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
                 dialog.dismiss();
@@ -242,10 +237,6 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
                     }
                 });
 
-
-
-
-
             }
         });
 
@@ -293,27 +284,6 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
     }
 
 
-    void setProfile(final String uid) {
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(Constants.SAVE_USER).child(uid);
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot mainSnapshot) {
-//                UserFormater userProfile = mainSnapshot.getValue(UserFormater.class);
-//                String name=userProfile.getName();
-//                NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view_draw);
-//                View headerView = navigationView.getHeaderView(0);
-//                TextView navUsername = (TextView) headerView.findViewById(R.id.user_drawer_name);
-                //navUsername.setText(name);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -321,7 +291,6 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
             case PICK_IMAGE_GALERY:
                 if (data != null) {
                     setUpload(data.getData(),uid);
-                    Toast.makeText(this, data.getData().toString(), Toast.LENGTH_SHORT).show();
                 }
                 break;
             case PICK_IMAGE_CAMERA:
@@ -332,7 +301,6 @@ public class DashBoard extends AppCompatActivity implements NavigationView.OnNav
                     profile.setImageBitmap(bitmap);
                 }
                 break;
-
         }
     }
 

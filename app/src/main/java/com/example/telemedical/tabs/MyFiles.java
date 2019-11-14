@@ -93,8 +93,6 @@ public class MyFiles extends Fragment implements View.OnClickListener {
         MyFileAdapter adapter = new MyFileAdapter(list, getActivity(), currentUser.getUid());
         adapter.setHasStableIds(true);
         myFile.setAdapter(adapter);
-
-
         return view;
     }
 
@@ -104,7 +102,7 @@ public class MyFiles extends Fragment implements View.OnClickListener {
         mStorageRef = FirebaseStorage.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
-        checkPermision();
+
     }
 
     void getStarted() {
@@ -126,20 +124,6 @@ public class MyFiles extends Fragment implements View.OnClickListener {
 
             }
         });
-
-
-    }
-
-    void checkPermision() {
-        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-        } else {
-            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_CODE);
-        }
-        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-        } else {
-            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_CODE);
-        }
-
     }
 
     private void selectPdf() {
@@ -156,7 +140,7 @@ public class MyFiles extends Fragment implements View.OnClickListener {
         dialog.show();
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
-        String filename = filenamer + "|" + System.currentTimeMillis();
+        String filename = filenamer + "," + System.currentTimeMillis();
         StorageReference imagesRef = storageRef.child(Constants.UPLOAD_FILE + currentUser.getUid() + "/" + filename);
         UploadTask uploadTask = imagesRef.putFile(file);
         uploadTask.addOnFailureListener(new OnFailureListener() {
@@ -164,7 +148,6 @@ public class MyFiles extends Fragment implements View.OnClickListener {
             public void onFailure(@NonNull Exception exception) {
                 // Handle unsuccessful uploads
                 dialog.dismiss();
-
             }
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
@@ -219,8 +202,6 @@ public class MyFiles extends Fragment implements View.OnClickListener {
 
 
     Uri createPdf(Bitmap bitmap) {
-
-
         PdfDocument document = new PdfDocument();
         PdfDocument.PageInfo pi = new PdfDocument.PageInfo.Builder(bitmap.getWidth(), bitmap.getHeight(), 1).create();
         PdfDocument.Page page = document.startPage(pi);
@@ -233,7 +214,11 @@ public class MyFiles extends Fragment implements View.OnClickListener {
         paint.setColor(Color.BLUE);
         canvas.drawBitmap(bitmap, 0, 0, null);
         document.finishPage(page);
-        File dir = new File(Environment.getExternalStorageDirectory(), "TeleMedical" + File.separator + "temp");
+        File first = new File(Environment.getExternalStorageDirectory(), "TeleMedical");
+        if (!first.exists()) {
+            first.mkdir();
+        }
+        File dir = new File(first, "temp");
         if (!dir.exists()) {
             dir.mkdir();
         }
@@ -283,7 +268,6 @@ public class MyFiles extends Fragment implements View.OnClickListener {
                 e.printStackTrace();
             }
             setUpload(createPdf(bitmap), getFileName(createPdf(bitmap)));
-
         }
 
     }
